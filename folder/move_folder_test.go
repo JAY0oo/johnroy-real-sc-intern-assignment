@@ -27,6 +27,7 @@ func Test_folder_MoveFolder(t *testing.T) {
 		err error
 	}{
 		{
+			// Normal operation, no errors (hard coded input and expected folders for easier debugging)
 			name: "Normal operation",
 			orgID: testUUID,
 			folder: []folder.Folder{
@@ -52,17 +53,10 @@ func Test_folder_MoveFolder(t *testing.T) {
 			err: nil,
 		},
 		{
+			//
 			name: "Moving a folder to its own child folder",
-			orgID: testUUID,
-			folder: []folder.Folder{
-				{Name: "alpha", OrgId: testUUID, Paths: "alpha"},
-				{Name: "bravo", OrgId: testUUID, Paths: "alpha.bravo"},
-				{Name: "charlie", OrgId: testUUID, Paths: "alpha.bravo.charlie"},
-				{Name: "delta", OrgId: testUUID, Paths: "alpha.delta"},
-				{Name: "echo", OrgId: testUUID, Paths: "alpha.delta.echo"},
-				{Name: "foxtrot", OrgId: testUUID, Paths: "foxtrot"},
-				{Name: "golf", OrgId: testUUID, Paths: "golf"},
-			},
+			orgID: OrgID,
+			folder: res,
 			target: "alpha",
 			destination: "bravo",
 			want: nil,
