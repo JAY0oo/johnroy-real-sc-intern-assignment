@@ -15,7 +15,7 @@ func (f *driver) MoveFolder(orgId uuid.UUID, name string, dst string) ([]Folder,
 	// ERROR CHECKS
 	// Move folder to itself 
 	if name == dst {
-		return nil, errors.New("Error: cannot move folder to itself!")
+		return nil, errors.New("cannot move folder to itself")
 	}
 	
 	
@@ -46,16 +46,28 @@ func (f *driver) MoveFolder(orgId uuid.UUID, name string, dst string) ([]Folder,
 	}
 
 	if !srcExist {
-		return nil, errors.New("Error: source folder does not exist!")
+		return nil, errors.New("source folder does not exist")
 	}
+
+	// check if destination doesn't exist its either in a different org or destination does not exist
 	if !dstExist {
-		return nil, errors.New("Error: destination folder does not exist!")
+		allFolders := GetAllFolders()
+		folderFound := false
+		for _, folder := range allFolders {
+			if folder.Name == dst {
+				folderFound = true
+				if folder.OrgId != orgId {
+					return nil, errors.New("cannot move folder to a different organization")
+				} 
+			} 
+		}
+		if !folderFound {
+			return nil, errors.New("destination folder does not exist")
+		}
 	}
+
 	if strings.HasPrefix(dstFolder.Paths, srcFolder.Paths) {
-		return nil, errors.New("Error: can't move folder to a child of itself!")
-	}
-	if srcFolder.OrgId != dstFolder.OrgId {
-		return nil, errors.New("Error: cannot move folder to a different organization!")
+		return nil, errors.New("can't move folder to a child of itself")
 	}
 
 

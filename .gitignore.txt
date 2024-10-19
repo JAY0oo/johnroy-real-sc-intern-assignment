@@ -1,2 +1,0 @@
-move_folder.go
-move_folder_test.go

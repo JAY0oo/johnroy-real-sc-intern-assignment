@@ -33,5 +33,10 @@
     "name": "golf",
     "org_id": "c1556e17-b7c0-45a3-a6ae-9546248fb17a",
     "paths": "golf"
+  },
+  {
+    "name": "hotel",
+    "org_id": "c1556e17-b7c0-45a3-a6ae-9546248fb17b",
+    "paths": "golf"
   }
 ]

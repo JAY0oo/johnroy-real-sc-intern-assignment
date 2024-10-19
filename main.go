@@ -14,16 +14,17 @@ func main() {
 	
 	// example usage
 	folderDriver := folder.NewDriver(res)
-	folder.PrettyPrint(folderDriver)
+	
 	orgFolder := folderDriver.GetFoldersByOrgID(OrgID)
 	child := folderDriver.GetAllChildFolders(OrgID, "alpha")
-
+	fmt.Println("DRIVER")
+	folder.PrettyPrint(res)
 	fmt.Println("OrgFolder Before")
 	folder.PrettyPrint(orgFolder)
 
 	// MOVE
 	fmt.Println("MOVE")
-	test, err := folderDriver.MoveFolder(OrgID, "alpha", "golf")
+	test, err := folderDriver.MoveFolder(OrgID, "alpha", "hotssesl")
 	if err != nil {
 		fmt.Println("Error moving folder: ", err)
 	} else {
@@ -43,4 +44,8 @@ func main() {
 
 	fmt.Println("FOLDERS WITH NAME:")
 	folder.PrettyPrint(child)
+
+	fmt.Println("Folders from GetAllFolders():")
+	folder.PrettyPrint(res)
+
 }
