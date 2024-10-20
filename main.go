@@ -19,15 +19,18 @@ func main() {
 	println("\n")
 
 	// show child folders
-	parent := "alpha"
-	child := folderDriver.GetAllChildFolders(OrgID, parent)
-	fmt.Printf("Child folders of %v:\n", parent)
-	folder.PrettyPrint(child)
+	folder1 := "noble-vixen"
+	folder2 := "free-contessa" 
+
+
+	children := folderDriver.GetAllChildFolders(OrgID, folder2)
+	fmt.Printf("\nChild folders of %v:\n", folder2)
+	folder.PrettyPrint(children)
 	println("\n")
 
 	// Showcase:
-	// move folder alpha to folder golf
-	newFolders, err := folderDriver.MoveFolder(OrgID, "alpha", "golf")
+	// move folder noble-vixen to folder free-contessa 
+	newFolders, err := folderDriver.MoveFolder(OrgID, folder1, folder2)
 	if err != nil {
 		fmt.Println("Error moving folder: ", err)
 	} else {
@@ -37,8 +40,21 @@ func main() {
 		folder.PrettyPrint(res)
 		folderDriver = folder.NewDriver(res)
 	}
-	// list golf new subfolders
-	fmt.Println("New subfolders of golf:")
-	folder.PrettyPrint(folderDriver.GetAllChildFolders(OrgID, "golf"))
+	// list free-contessa new subfolders
+	fmt.Printf("New subfolders of %v:", folder2)
+	folder.PrettyPrint(folderDriver.GetAllChildFolders(OrgID, folder2))
 	println("\n")
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
