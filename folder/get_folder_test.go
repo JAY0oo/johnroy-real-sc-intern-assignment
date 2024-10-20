@@ -43,7 +43,7 @@ func Test_folder_GetAllChildFolders(t *testing.T) {
 			},
 		},
 		{
-			// Invalid ordID as input, expected to raise error and get nil
+			// error: invalid ordID 
 			name: "Invalid ordID",
 			orgID: uuid.Must(uuid.NewV1()),
 			folder: []folder.Folder{
@@ -54,7 +54,7 @@ func Test_folder_GetAllChildFolders(t *testing.T) {
 			want: nil,
 		},
 		{
-			// Folder doesn't exist, expect to return null and error raised
+			// error: folder doesn't exist
 			name: "Invalid folder name",
 			orgID: testUUID,
 			folder: []folder.Folder{
@@ -69,7 +69,7 @@ func Test_folder_GetAllChildFolders(t *testing.T) {
 			want: nil,
 		},
 		{
-			// Folder has no child, expect to return an empty list and a non error alert
+			// error: folder has no child 
 			name: "Folder has no children folders",
 			orgID: testUUID,
 			folder: []folder.Folder{
@@ -103,7 +103,7 @@ func Test_folder_GetAllChildFolders(t *testing.T) {
 			},
 		},
 		{
-			// Folder empty return nil early
+			// error: empty folder
 			name: "Empty folder",
 			orgID: testUUID,
 			folder: []folder.Folder{},
@@ -151,7 +151,7 @@ func Test_folder_GetFoldersByOrgID(t *testing.T) {
 			},
 		},
 		{
-			// Invalid orgID no folder returned
+			// error: invalid orgID
 			name: "Invalid orgID",
 			orgID: uuid.Must(uuid.NewV1()),
 			folders: []folder.Folder{

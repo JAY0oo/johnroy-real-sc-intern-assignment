@@ -53,16 +53,17 @@ func Test_folder_MoveFolder(t *testing.T) {
 			err: nil,
 		},
 		{
-			//
+			// error: moving folder to its own subfolder
 			name: "Moving a folder to its own child folder",
 			orgID: OrgID,
 			folder: res,
 			target: "alpha",
 			destination: "bravo",
 			want: nil,
-			err: errors.New("can't move folder to a child of itself"),
+			err: errors.New("cannot move folder to a child of itself"),
 		},
 		{
+			// error: moving folder to its self
 			name: "Moving folder to itself",
 			orgID: testUUID,
 			folder: []folder.Folder{
@@ -80,6 +81,7 @@ func Test_folder_MoveFolder(t *testing.T) {
 			err: errors.New("cannot move folder to itself"),
 		},
 		{
+			// error: moving folder to a different orgID 
 			name: "moving folder to a different orgID",
 			orgID: OrgID,
 			folder: res,
@@ -89,6 +91,7 @@ func Test_folder_MoveFolder(t *testing.T) {
 			err: errors.New("cannot move folder to a different organization"),
 		},
 		{
+			// error: moving a folder that doesn't exist
 			name: "Source folder does not exist",
 			orgID: OrgID,
 			folder: res,
@@ -98,6 +101,7 @@ func Test_folder_MoveFolder(t *testing.T) {
 			err: errors.New("source folder does not exist"),
 		},
 		{
+			// error: moving a folder to a folder that doesn't exist
 			name: "destination folder does not exist",
 			orgID: OrgID,
 			folder: res,

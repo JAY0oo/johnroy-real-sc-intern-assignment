@@ -9,43 +9,36 @@ import (
 
 func main() {
 	OrgID := uuid.FromStringOrNil(folder.DefaultOrgID)
-	
 	res := folder.GetAllFolders()
-	
-	// example usage
 	folderDriver := folder.NewDriver(res)
-	
-	orgFolder := folderDriver.GetFoldersByOrgID(OrgID)
-	child := folderDriver.GetAllChildFolders(OrgID, "alpha")
-	fmt.Println("DRIVER")
-	folder.PrettyPrint(res)
-	fmt.Println("OrgFolder Before")
-	folder.PrettyPrint(orgFolder)
 
-	// MOVE
-	fmt.Println("MOVE")
-	test, err := folderDriver.MoveFolder(OrgID, "alpha", "hotssesl")
+	// show folder of orgID
+	orgFolder := folderDriver.GetFoldersByOrgID(OrgID)
+	fmt.Printf("Folders of orgID: %v:\n", OrgID)
+	folder.PrettyPrint(orgFolder)
+	println("\n")
+
+	// show child folders
+	parent := "alpha"
+	child := folderDriver.GetAllChildFolders(OrgID, parent)
+	fmt.Printf("Child folders of %v:\n", parent)
+	folder.PrettyPrint(child)
+	println("\n")
+
+	// Showcase:
+	// move folder alpha to folder golf
+	newFolders, err := folderDriver.MoveFolder(OrgID, "alpha", "golf")
 	if err != nil {
 		fmt.Println("Error moving folder: ", err)
 	} else {
-		fmt.Println("OrgFolder After")
-		folder.PrettyPrint(test)
-		// orgFolder = append(orgFolder, test...)
+		fmt.Println("New folder: ")
+		
+		res = newFolders
+		folder.PrettyPrint(res)
+		folderDriver = folder.NewDriver(res)
 	}
-
-	// folder.PrettyPrint(test)
-
-	
-	//folder.PrettyPrint(orgFolder)
-
-	//folder.PrettyPrint(res)
-	//fmt.Printf("\n Folders for orgID: %s", orgID)
-	
-
-	fmt.Println("FOLDERS WITH NAME:")
-	folder.PrettyPrint(child)
-
-	fmt.Println("Folders from GetAllFolders():")
-	folder.PrettyPrint(res)
-
+	// list golf new subfolders
+	fmt.Println("New subfolders of golf:")
+	folder.PrettyPrint(folderDriver.GetAllChildFolders(OrgID, "golf"))
+	println("\n")
 }

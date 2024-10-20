@@ -26,21 +26,21 @@ func (f *driver) GetFoldersByOrgID(orgID uuid.UUID) []Folder {
 }
 
 func (f *driver) GetAllChildFolders(orgID uuid.UUID, name string) []Folder {
-	// Your code here...
 
-	// orgID error test
+	// check: orgID validity
 	if orgID == uuid.Nil {
-		log.Printf("ERROR: Invalid orgID: %v", orgID)
+		fmt.Printf("ERROR: Invalid orgID: %v", orgID)
 		return nil
 	}
 
 	folderWithOrgID := f.GetFoldersByOrgID(orgID)
+	// check: if folderWithOrgID is empty
 	if len(folderWithOrgID) == 0 {
-		// check if folderWithOrgID is empty to avoid operating on empty slice
 		fmt.Printf("Error: No folders found for orgID: %v\n", orgID)
 		return nil
 	}
 
+	// main
 	var nameExist bool = false
 	children := []Folder{}
 
@@ -53,7 +53,7 @@ func (f *driver) GetAllChildFolders(orgID uuid.UUID, name string) []Folder {
 		}
 	} 
 	
-	// if children slice is empty its either the folder has no children or the folder does not exist
+	// check: if children slice is empty its either the folder has no children or the folder does not exist
 	if len(children) == 0 {
 		if nameExist{
 			fmt.Printf("Alert: Folder: " + name + " has no children folders")
