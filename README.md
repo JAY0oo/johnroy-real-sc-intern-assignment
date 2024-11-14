@@ -1,6 +1,7 @@
 # SafetyCulture Internship Take Home Assessment
 
-## UPDATE: Got ghosted by SafetyCulture so this must suck. Can someone critique my solutions and give me feedback will really appriciate it :( 
+## UPDATE: 
+  Got ghosted by SafetyCulture so this must suck. Can someone critique my solutions and give me feedback will really appriciate it :( 
 
 This is my solution for SafetyCulture's Take home Assessment challange.
 
